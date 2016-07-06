@@ -10,8 +10,6 @@ namespace AspNetFileBrowsing.Controllers
 {  
     public class ValuesController : ApiController
     {
-        public BrowserModel browser = new BrowserModel();
-
         // GET api/values
         public IEnumerable<string> Get()
         {            
