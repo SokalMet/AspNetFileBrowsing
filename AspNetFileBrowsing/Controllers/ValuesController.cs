@@ -19,25 +19,16 @@ namespace AspNetFileBrowsing.Controllers
             return file.GetFolderData();
         }
 
-        // GET api/values/5
-        public FolderDataModel Get(string currentPath, string folderName, bool toUpper)
+        // GET api/values/
+        public FolderDataModel Get(string currentPath, string folderName)
         {
-            return file.GetFolderData(currentPath, folderName, toUpper);
+            return file.GetFolderData(currentPath, folderName);
         }
 
-        // POST api/values
-        public void Post([FromBody]string value)
+        // GET api/values/
+        public FolderDataModel Get(string currentPath, bool toUpper)
         {
-        }
-
-        // PUT api/values/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE api/values/5
-        public void Delete(int id)
-        {
+            return file.GetFolderData(currentPath, "", toUpper);
         }
     }
 }

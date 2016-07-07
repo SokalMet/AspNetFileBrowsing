@@ -51,10 +51,12 @@ namespace AspNetFileBrowsing.Controllers.Code
                 {
                     //TODO: get all files and folders names, filter files by size and get count of each group; fill the model
                     var tempDir = new DirectoryInfo(path);
-                    model.LessThan10Mb = tempDir.EnumerateFiles("*", SearchOption.TopDirectoryOnly).Count(file => file.Length/1024 < 10000);
-                    model.From10MbTo50Mb= tempDir.EnumerateFiles("*", SearchOption.TopDirectoryOnly).Count(file => file.Length / 1024 >= 10000 && file.Length / 1024d <= 50000);
-                    model.MoreThan50Mb = tempDir.EnumerateFiles("*", SearchOption.TopDirectoryOnly).Count(file => file.Length / 1024 > 50000);
-                   
+                    model.LessThan10Mb = tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length/1024 < 10000)  ;
+                    model.From10MbTo50Mb= tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length / 1024 >= 10000 && file.Length / 1024d <= 50000);
+                    model.MoreThan50Mb = tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length / 1024 > 50000);
+
+                    //model.Folders = Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly);
+                    
 
                 }
                 catch (Exception ex)
