@@ -1,4 +1,6 @@
-﻿using AspNetFileBrowsing.Models;
+﻿using AspNetFileBrowsing.Controllers.Code;
+using AspNetFileBrowsing.Models;
+using AspNetFileBrowsing.Models.File;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +12,17 @@ namespace AspNetFileBrowsing.Controllers
 {  
     public class ValuesController : ApiController
     {
+        FileHelper file = new FileHelper();   
         // GET api/values
-        public IEnumerable<string> Get()
+        public FolderDataModel Get()
         {            
-            return new string[] { "value1", "value2" };
+            return file.GetFolderData();
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public FolderDataModel Get(string currentPath, string folderName, bool toUpper)
         {
-            return "value";
+            return file.GetFolderData(currentPath, folderName, toUpper);
         }
 
         // POST api/values
