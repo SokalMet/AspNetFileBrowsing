@@ -5,11 +5,11 @@ using System.IO;
 using System.Linq;
 using System.Web;
 
-namespace AspNetFileBrowsing.Controllers.Code
+namespace AspNetFileBrowsing.Code
 {
-    public class FileHelper
+    public static class FileHelper
     {
-        public FolderDataModel GetFolderData(string currentPath = "", string folderName = "", bool toUpper = false)
+        public static FolderDataModel GetFolderData(string currentPath = "", string folderName = "", bool toUpper = false)
         {
             var path = ComputePath(currentPath, folderName, toUpper);
             return GetFolderDataByPath(path);
@@ -51,12 +51,13 @@ namespace AspNetFileBrowsing.Controllers.Code
                 {
                     //TODO: get all files and folders names, filter files by size and get count of each group; fill the model
                     var tempDir = new DirectoryInfo(path);
-                    model.LessThan10Mb = tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length/1024 < 10000)  ;
-                    model.From10MbTo50Mb= tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length / 1024 >= 10000 && file.Length / 1024d <= 50000);
-                    model.MoreThan50Mb = tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length / 1024 > 50000);
+                    model.LessThan10Mb = tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length/1024/1024 < 10)  ;
+                    model.From10MbTo50Mb= tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length / 1024/1024 >= 10 && file.Length / 1024/1024 <= 50);
+                    model.MoreThan50Mb = tempDir.EnumerateFiles("*", SearchOption.AllDirectories).Count(file => file.Length / 1024 /1024 > 50);
 
-                    //model.Folders = Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly);
-                    
+                    model.Folders = Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => x.Split('\\').Last()).ToList();
+                    model.Files = Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly).Select(x => x.Split('\\').Last()).ToList();
+
 
                 }
                 catch (Exception ex)
