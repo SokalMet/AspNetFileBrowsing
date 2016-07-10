@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="browser">
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta charset="utf-8" />
@@ -7,7 +7,6 @@
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
         @Scripts.Render("~/bundles/modernizr")
-        <script src="~/Scripts/angular.min.js"></script>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head>
 
@@ -15,11 +14,10 @@
     <script src="~/Scripts/app.js"></script>
     <div class="navbar navbar-inverse navbar-fixed-top">
         
-                    @Html.ActionLink("API", "Index", "Help", new { area = "" }, null)
+        <b>@Html.ActionLink("API", "Index", "Help", new { area = "" }, null)</b> 
                
     </div>
     <div class="container body-content">
-        {{"hello" + " you!"}}
         @RenderBody()
         <hr />
         <footer>

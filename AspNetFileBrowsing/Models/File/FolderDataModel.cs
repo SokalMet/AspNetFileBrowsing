@@ -5,6 +5,7 @@ namespace AspNetFileBrowsing.Models.File
     public class FolderDataModel
     {
         public string CurrentPath { get; set; }
+        public bool CanGoUpper { get; set; }
 
         public int LessThan10Mb { get; set; }
         public int From10MbTo50Mb { get; set; }

@@ -57,6 +57,7 @@ namespace AspNetFileBrowsing.Code
 
                     model.Folders = Directory.GetDirectories(path, "*", SearchOption.TopDirectoryOnly).Select(x => x.Split('\\').Last()).ToList();
                     model.Files = Directory.GetFiles(path, "*", SearchOption.TopDirectoryOnly).Select(x => x.Split('\\').Last()).ToList();
+                    model.CanGoUpper = tempDir.Parent != null;
 
 
                 }
